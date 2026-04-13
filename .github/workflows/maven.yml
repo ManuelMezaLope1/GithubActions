@@ -39,3 +39,8 @@ jobs:
       
     - name: Push image
       run: docker push manuelmezalope1/angular-image:latest
+
+    - name: Debug credentials
+      run: | 
+        echo "USER=${{ secrets.DOCKER_USERNAME }}" 
+        echo "PASS LENGTH=$(echo -n '${{ secrets.DOCKER_PASSWORD }}' | wc -c)"
