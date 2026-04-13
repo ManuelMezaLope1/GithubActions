@@ -30,7 +30,6 @@ public class EmpleadoControlador {
     public String mostrarInicio() {
         return "inicio";
     }
-    
 
     @GetMapping("/empleados")
     public List<Empleado> listarTodosLosEmpleados(){
