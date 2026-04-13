@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AngularApplication<angular>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.spring.angular.AngularApplication",
+            "projectName": "angular",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
