@@ -34,7 +34,7 @@ jobs:
     - name: Build & pull Docker imagen
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
-        image: manuelmeza/angular-image
+        image: manuelmezalope1/angular-image
         tags: latest
         registry: docker.io
         dockerfile: Dockerfile
