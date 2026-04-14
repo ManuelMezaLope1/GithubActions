@@ -5,4 +5,4 @@
 ./mvnw clean package -DskipTests || mvn clean package -DskipTests
 
 # Ejecutar el JAR generado
-java -jar target/myapp.jar
+java -jar target/angular-0.0.1-SNAPSHOT.jar
