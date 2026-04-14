@@ -11,6 +11,15 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: control_empleados
+        ports:
+          - 3306:3306
+          
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
@@ -20,14 +29,18 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      run: mvn clean install
+      run: mvn -f fullstack/angular/pom.xml clean install -DskipTests
 
-    - name: Build & pull Docker imagen
-      uses: mr-smithers-excellent/docker-build-push@v6
-      with:
-        image: manuelmeza/angular-image
-        tags: latest
-        registry: docker.io
-        dockerfile: Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Login to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      
+    - name: Build image
+      run: docker build -t manuelmezalope1/angular-image:latest -f fullstack/angular/Dockerfile .
+      
+    - name: Push image
+      run: docker push manuelmezalope1/angular-image:latest
+
+    - name: Debug credentials
+      run: | 
+        echo "USER=${{ secrets.DOCKER_USERNAME }}" 
+        echo "PASS LENGTH=$(echo -n '${{ secrets.DOCKER_PASSWORD }}' | wc -c)"
